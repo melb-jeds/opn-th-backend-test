@@ -75,13 +75,13 @@ export default class Cart {
 
 	public count(): CartProduct[] {
 		const products = Object.values(this.products)
-		const result = this._activateFreebie(products)
+		const result = this._mergeWithFreebieProducts(products)
 		return result
 	}
 
 	public quantity(): number {
 		const products = Object.values(this.products)
-		const productsWithFreebies = this._activateFreebie(products)
+		const productsWithFreebies = this._mergeWithFreebieProducts(products)
 		const count = productsWithFreebies.reduce((sum, product) => (sum += product.quantity), 0)
 		return count
 	}
@@ -160,7 +160,7 @@ export default class Cart {
 		return total - discount
 	}
 
-	private _activateFreebie(products: CartProduct[]): CartProduct[] {
+	private _mergeWithFreebieProducts(products: CartProduct[]): CartProduct[] {
 		const productIntersects = products.map((product) => {
 			const freebie = this.freebieProducts[product.productId]
 			if (_.isEmpty(freebie)) return product
