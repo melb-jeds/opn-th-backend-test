@@ -1,0 +1,69 @@
+Customer {
+    id
+    name: string
+    birthDate: Date
+    gender: string
+    country: string
+    state: string
+    city: string
+    street: string
+    postalCode: number
+    carts: {
+        productId
+        variants: {
+            id
+            optionId: string 
+        }[]
+        quantity: number
+    }[]
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Nullable<Date>
+}
+
+Product {
+    id
+    name: string
+    defaultPrice: number
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Nullable<Date>
+}
+
+Category {
+    id
+    name: string
+}
+
+ProductVariant {
+    id
+    productId: string
+    name: string
+    options: {
+        id
+        value: string
+        priceFactor: number
+    }[] 
+}
+
+ProductCategory {
+    id
+    productId: string
+    categoryId: string
+}
+
+Transaction {
+    id
+    userId
+    products: {
+        productId
+        quantity: number
+        variants: {
+            name: string
+            option: string
+            priceFactor: number
+        }[]
+        price: number
+    }[]
+    createdAt: Date
+}
